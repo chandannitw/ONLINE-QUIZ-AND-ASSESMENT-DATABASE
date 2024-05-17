@@ -1,0 +1,91 @@
+CREATE TABLE USER 
+(
+  	USER_ID INTEGER PRIMARY KEY,
+    	EMAIL VARCHAR(100),
+  	USERNAME VARCHAR(100),
+  	PASSWORD VARCHAR(100),
+  	USER_TYPE VARCHAR(100)
+);
+
+INSERT INTO "USER" VALUES (01, 'xyz@gmail.com', 'XYZ', '@123', 'student');
+INSERT INTO "USER" VALUES (02, 'abc@gmail.com', 'ABC', '@125', 'student');
+INSERT INTO "USER" VALUES (03, 'MNC@gmail.com', 'MNC', '@127', 'student');
+INSERT INTO "USER" VALUES (04, 'inst_1@gmail.com', 'INST1', '@210', 'instructor');
+INSERT INTO "USER" VALUES (05, 'inst_2@gmail.com', 'INST2', '@220', 'instructor');
+INSERT INTO "USER" VALUES (06, 'g1@gmail.com', 'guest_1', '@310', 'guest');
+INSERT INTO "USER" VALUES (07, 'admin@gmail.com', 'admin_01', '@910', 'admin');
+
+ 
+
+
+CREATE TABLE QUIZ
+(
+	QUIZ_ID INTEGER PRIMARY KEY,
+  	QUIZ_NAME VARCHAR(100),
+  	DESCRIPTION VARCHAR(100),
+  	DATE_CREATED DATE
+);
+
+
+INSERT INTO "QUIZ" VALUES (1, 'Biology Basics Quiz', 'Test your knowledge of fundamental concepts in biology.', '2023-01-23');
+INSERT INTO "QUIZ" VALUES (2, 'Geometry Challenge Quiz', 'Challenge yourself with geometric shapes and properties.', '2023-02-23');
+INSERT INTO "QUIZ" VALUES (3, 'Grammar Guru Quiz', 'Master grammar rules and improve your language skills.', '2023-03-24');
+INSERT INTO "QUIZ" VALUES (4, 'World History Timeline Quiz', 'Explore historical events from different eras and civilizations.', '2024-04-20');
+INSERT INTO "QUIZ" VALUES (5, 'Computer Basics Quiz', 'Test your understanding of computer hardware and software.', '2024-05-02');
+INSERT INTO "QUIZ" VALUES (6, 'Trivia Time Quiz', 'Have fun with a variety of trivia questions from different categories.', '2024-06-12');
+
+
+  CREATE TABLE QUESTION 
+  (
+  		QUES_ID INTEGER PRIMARY KEY,
+    	QUES_TEXT VARCHAR(100),
+    	QUIZ_ID INTEGER,
+    	FOREIGN KEY(QUIZ_ID) REFERENCES QUIZ(QUIZ_ID)
+  );
+
+
+INSERT INTO "QUESTION" VALUES(11, 'What is the powerhouse of the cell?', 1),
+INSERT INTO "QUESTION" VALUES(12, 'Solve for x: 2x + 5 = 15', 2),
+INSERT INTO "QUESTION" VALUES(13, 'Identify the correct use of "their" in a sentence.', 3),
+INSERT INTO "QUESTION" VALUES(14, 'When did the Industrial Revolution begin?', 4),
+INSERT INTO "QUESTION" VALUES(15, 'What is RAM?', 5),
+INSERT INTO "QUESTION" VALUES(16, 'Who is the author of "Harry Potter" series?', 6);
+
+
+
+CREATE TABLE ANSWER 
+(
+	ANS_ID INTEGER PRIMARY KEY,
+  	ANS_TEXT VARCHAR(100),
+  	IS_CORRECT VARCHAR(100)
+);
+
+
+INSERT INTO "ANSWER" VALUES(21, 'Mitochondria','Yes');
+INSERT INTO "ANSWER" VALUES(22, '21', 'No');
+INSERT INTO "ANSWER" VALUES(23, 'It is their house.','Yes');
+INSERT INTO "ANSWER" VALUES(24, '1760', 'Yes');
+INSERT INTO "ANSWER" VALUES(25, 'Random-Access-Memory', 'Yes');
+INSERT INTO "ANSWER" VALUES(26, 'Einstein', 'No');
+
+
+
+CREATE TABLE RESULT
+(
+	RES_ID INTEGER PRIMARY KEY,
+  	SCORE INTEGER,
+  	USER_ID INTEGER,
+  	QUIZ_ID INTEGER,
+  	DATE_TAKEN DATE,
+  	FOREIGN KEY (USER_ID) REFERENCES USER(USER_ID),
+ 	FOREIGN KEY (QUIZ_ID) REFERENCES QUIZ(QUIZ_ID)
+);
+
+
+INSERT INTO "RESULT" VALUES(901, 90, 201 , 1, '2023-01-24');
+INSERT INTO "RESULT" VALUES(902, 82,  202, 2 , '2023-03-24');
+INSERT INTO "RESULT" VALUES(903, 85,  203, 3 , '2023-03-24');
+INSERT INTO "RESULT" VALUES(904, 95, 204, 4 , '2024-04-20');
+INSERT INTO "RESULT" VALUES(905, 80, 205, 5, '2024-05-02');
+INSERT INTO "RESULT" VALUES(906, 70, 206, 6, '2024-06-12');
+
